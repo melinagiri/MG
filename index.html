@@ -81,6 +81,11 @@ body{
 [data-theme="light"] .service-card:hover{background:var(--lt-bg2)}
 [data-theme="light"] .service-card h3{color:var(--lt-ink)}
 [data-theme="light"] .service-card p{color:var(--lt-ink2)}
+[data-theme="light"] .service-card:hover h3{color:var(--lt-ink)}
+[data-theme="light"] .service-card:hover p{color:var(--lt-ink2)}
+[data-theme="light"] .service-card:hover .service-features li{color:var(--lt-ink2)!important}
+[data-theme="light"] .service-card .service-features li{color:var(--lt-ink2)}
+[data-theme="light"] .service-card:hover::before{background:rgba(185,28,28,0.03)}
 [data-theme="light"] .service-features li{color:var(--lt-ink2);border-bottom-color:rgba(185,28,28,0.07)}
 [data-theme="light"] .svc-num{color:rgba(185,28,28,0.07)!important}
 [data-theme="light"] .service-card:hover .svc-num{color:rgba(185,28,28,0.12)!important}
@@ -126,6 +131,19 @@ body{
 [data-theme="light"] .project-card p{color:var(--lt-ink2)}
 [data-theme="light"] .stack-tag{background:rgba(0,0,0,0.04);border-color:rgba(0,0,0,0.12);color:var(--lt-ink2)}
 [data-theme="light"] .project-tag{color:var(--red-deep);border-color:rgba(185,28,28,0.25);background:rgba(185,28,28,0.05)}
+/* Modal light mode */
+[data-theme="light"] .modal-overlay{background:rgba(20,15,10,0.75)}
+[data-theme="light"] .modal-box{background:var(--lt-bg);border-color:rgba(185,28,28,0.15)}
+[data-theme="light"] .modal-header{background:var(--lt-bg);border-bottom-color:rgba(185,28,28,0.12)}
+[data-theme="light"] .modal-title-group h3{color:var(--lt-ink)}
+[data-theme="light"] .modal-close{background:rgba(185,28,28,0.08);border-color:rgba(185,28,28,0.2);color:var(--lt-ink)}
+[data-theme="light"] .modal-text{color:var(--lt-ink2)}
+[data-theme="light"] .modal-role-item{background:rgba(185,28,28,0.04);border-color:rgba(185,28,28,0.12)}
+[data-theme="light"] .modal-role-item-val{color:var(--lt-ink2)}
+[data-theme="light"] .modal-tag-chip{background:rgba(185,28,28,0.07);border-color:rgba(185,28,28,0.18);color:var(--red-deep)}
+[data-theme="light"] .modal-outcome-item{color:var(--lt-ink2)}
+[data-theme="light"] .modal-section-title{color:var(--red-deep)}
+[data-theme="light"] .modal-section-title::before{background:var(--red-deep)}
 [data-theme="light"] #contact{background:var(--lt-bg)}
 [data-theme="light"] .contact-info h3{color:var(--lt-ink)}
 [data-theme="light"] .contact-info>p{color:var(--lt-ink2)}
@@ -984,7 +1002,7 @@ h2 em{color:var(--red);font-style:italic}
 ═══════════════════════════════════ */
 .modal-overlay{
   position:fixed;inset:0;z-index:900;
-  background:rgba(5,5,5,0.92);
+  background:rgba(5,5,5,0.85);
   display:flex;align-items:center;justify-content:center;
   padding:2rem;
   opacity:0;pointer-events:none;transition:opacity .3s;
@@ -994,23 +1012,32 @@ h2 em{color:var(--red);font-style:italic}
 .modal-box{
   background:var(--charcoal);
   border:1px solid var(--border);
-  max-width:800px;width:100%;max-height:88vh;overflow-y:auto;
+  max-width:800px;width:100%;max-height:88vh;
+  overflow-y:auto;
+  display:flex;flex-direction:column;
   position:relative;
   transform:translateY(24px);transition:transform .35s var(--ease-smooth);
 }
 .modal-overlay.open .modal-box{transform:translateY(0)}
-.modal-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold))}
-.modal-header{padding:2.25rem 2.5rem 1.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;gap:1rem}
+.modal-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold));z-index:1}
+.modal-header{
+  padding:2.25rem 2.5rem 1.5rem;
+  border-bottom:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;
+  position:sticky;top:0;z-index:10;
+  background:var(--charcoal);
+  flex-shrink:0;
+}
 .modal-title-group .modal-tag-label{font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
-.modal-title-group h3{font-family:var(--font-head);font-size:2rem;font-weight:700;color:#fff;line-height:1.1}
+.modal-title-group h3{font-family:var(--font-head);font-size:2rem;font-weight:700;color:var(--white);line-height:1.1}
 .modal-close{
   width:36px;height:36px;background:rgba(185,28,28,0.1);border:1px solid rgba(185,28,28,0.2);
   display:flex;align-items:center;justify-content:center;
-  cursor:pointer;color:#fff;font-size:1rem;
+  cursor:pointer;color:var(--white);font-size:1rem;
   transition:background .2s;flex-shrink:0;
 }
-.modal-close:hover{background:var(--red)}
-.modal-body{padding:2rem 2.5rem 2.5rem;display:flex;flex-direction:column;gap:2rem}
+.modal-close:hover{background:var(--red);color:#fff}
+.modal-body{padding:2rem 2.5rem 2.5rem;display:flex;flex-direction:column;gap:2rem;overflow-y:auto}
 .modal-section-title{font-size:.67rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;display:flex;align-items:center;gap:.6rem}
 .modal-section-title::before{content:'';width:16px;height:1px;background:var(--gold)}
 .modal-text{font-size:.87rem;color:rgba(250,250,248,0.6);font-weight:300;line-height:1.9}
@@ -1168,7 +1195,203 @@ footer p a{color:var(--gold);text-decoration:none}
   .wb-highlights{grid-template-columns:1fr}
   .wb-impact-row{grid-template-columns:1fr 1fr}
 }
+
+/* ═══════════════════════════════════
+   PREMIUM CASE-STUDY COVER MOCKUPS
+═══════════════════════════════════ */
+.cover-mockup{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+/* Digital Profile System — clean enterprise grid */
+.cover-profiles{
+  background:linear-gradient(135deg,#0f172a 0%,#1e293b 60%,#0f172a 100%);
+}
+.cover-profiles-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:12px;width:100%;
+}
+.cover-profiles-card{
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+  border-radius:4px;padding:8px;display:flex;gap:6px;align-items:center;
+}
+.cover-profiles-avatar{
+  width:22px;height:22px;border-radius:50%;flex-shrink:0;
+}
+.cover-profiles-lines{display:flex;flex-direction:column;gap:3px;flex:1}
+.cover-profiles-line{height:3px;border-radius:2px;background:rgba(255,255,255,0.2)}
+.cover-profiles-badge{
+  font-size:.48rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:1px 5px;border-radius:2px;background:rgba(59,130,246,0.25);
+  border:1px solid rgba(59,130,246,0.4);color:rgba(147,197,253,0.9);
+  position:absolute;top:8px;right:8px;
+}
+.cover-profiles-label{
+  position:absolute;bottom:10px;left:50%;transform:translateX(-50%);
+  font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,0.25);white-space:nowrap;
+}
+.cover-profiles-accent{
+  position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,#3b82f6,#8b5cf6);
+}
+
+/* Haushala — warm wellness orb */
+.cover-haushala{
+  background:radial-gradient(ellipse at 40% 40%,#4a1942 0%,#1a0a2e 55%,#0d0518 100%);
+}
+.cover-haushala-orb{
+  width:70px;height:70px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#e879a4,#9333ea 60%,#4f1f8e);
+  box-shadow:0 0 40px rgba(233,121,164,0.4),0 0 80px rgba(147,51,234,0.2);
+  position:relative;z-index:2;flex-shrink:0;
+}
+.cover-haushala-orb::after{
+  content:'';position:absolute;inset:-8px;border-radius:50%;
+  border:1px solid rgba(233,121,164,0.25);
+}
+.cover-haushala-rings{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+}
+.cover-haushala-ring{
+  position:absolute;border-radius:50%;border:1px solid rgba(233,121,164,0.08);
+}
+.cover-haushala-words{
+  position:absolute;bottom:12px;display:flex;gap:6px;
+}
+.cover-haushala-word{
+  font-size:.42rem;letter-spacing:.12em;text-transform:uppercase;padding:2px 6px;
+  border-radius:10px;background:rgba(233,121,164,0.12);
+  border:1px solid rgba(233,121,164,0.2);color:rgba(233,121,164,0.7);
+}
+.cover-haushala-label{
+  position:absolute;top:10px;left:50%;transform:translateX(-50%);
+  font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,0.2);white-space:nowrap;
+}
+
+/* SBF — transit card with QR feel */
+.cover-sbf{
+  background:linear-gradient(145deg,#0c1445 0%,#1a2060 50%,#0c1445 100%);
+  position:relative;
+}
+.cover-sbf-card{
+  width:calc(100% - 20px);margin:10px;background:linear-gradient(135deg,#1e3a8a,#1e40af);
+  border-radius:6px;border:1px solid rgba(255,255,255,0.12);
+  padding:10px;position:relative;overflow:hidden;
+}
+.cover-sbf-card::before{
+  content:'';position:absolute;top:-20px;right:-20px;
+  width:80px;height:80px;border-radius:50%;
+  background:radial-gradient(circle,rgba(59,130,246,0.3),transparent 70%);
+}
+.cover-sbf-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.cover-sbf-logo{
+  font-size:.55rem;font-weight:800;letter-spacing:.08em;color:#93c5fd;
+}
+.cover-sbf-status{
+  font-size:.4rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  background:rgba(34,197,94,0.2);border:1px solid rgba(34,197,94,0.4);
+  color:#4ade80;padding:1px 5px;border-radius:2px;
+}
+.cover-sbf-qr{
+  width:28px;height:28px;display:grid;grid-template-columns:repeat(5,1fr);gap:1px;
+  margin-bottom:6px;
+}
+.cover-sbf-qr-cell{background:rgba(255,255,255,0.12);border-radius:1px}
+.cover-sbf-qr-cell.filled{background:rgba(255,255,255,0.85)}
+.cover-sbf-info{display:flex;gap:8px;font-size:.4rem;color:rgba(147,197,253,0.6)}
+.cover-sbf-routes{
+  display:flex;gap:4px;margin-top:4px;
+}
+.cover-sbf-route{
+  font-size:.38rem;padding:1px 5px;background:rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.12);border-radius:2px;color:rgba(255,255,255,0.4);
+}
+.cover-sbf-label{
+  position:absolute;bottom:8px;right:10px;
+  font-size:.42rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,0.2);
+}
+
+/* InfoSprout — clean notice board */
+.cover-infosprout{
+  background:linear-gradient(160deg,#0f2027,#203a43,#2c5364);
+}
+.cover-infosprout-board{
+  width:calc(100% - 16px);margin:8px;
+}
+.cover-infosprout-header{
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);
+  border-radius:3px 3px 0 0;padding:5px 8px;display:flex;align-items:center;gap:5px;
+}
+.cover-infosprout-icon{
+  width:8px;height:8px;border-radius:50%;background:#60a5fa;
+}
+.cover-infosprout-htitle{
+  font-size:.48rem;font-weight:600;color:rgba(255,255,255,0.6);letter-spacing:.05em;
+}
+.cover-infosprout-item{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);
+  border-top:none;padding:5px 8px;display:flex;gap:5px;align-items:flex-start;
+}
+.cover-infosprout-item:last-child{border-radius:0 0 3px 3px}
+.cover-infosprout-dot{
+  width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:2px;
+}
+.cover-infosprout-lines{flex:1;display:flex;flex-direction:column;gap:3px}
+.cover-infosprout-line{height:2.5px;border-radius:2px;background:rgba(255,255,255,0.15)}
+.cover-infosprout-tag{
+  font-size:.38rem;padding:1px 4px;border-radius:2px;flex-shrink:0;
+  font-weight:600;letter-spacing:.05em;
+}
+.cover-infosprout-label{
+  position:absolute;bottom:8px;left:50%;transform:translateX(-50%);
+  font-size:.42rem;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,0.18);white-space:nowrap;
+}
+
+/* SkillSprout — workshop event tiles */
+.cover-skillsprout{
+  background:linear-gradient(135deg,#0a0a0a 0%,#111827 50%,#0a0a0a 100%);
+}
+.cover-skillsprout-events{
+  display:flex;flex-direction:column;gap:5px;padding:10px;width:100%;
+}
+.cover-skillsprout-event{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+  border-radius:4px;padding:6px 8px;display:flex;justify-content:space-between;align-items:center;
+  border-left:2px solid transparent;
+}
+.cover-skillsprout-event.a1{border-left-color:#f59e0b}
+.cover-skillsprout-event.a2{border-left-color:#10b981}
+.cover-skillsprout-event.a3{border-left-color:#6366f1}
+.cover-skillsprout-etitle{display:flex;flex-direction:column;gap:2px}
+.cover-skillsprout-ename{height:3px;border-radius:2px;background:rgba(255,255,255,0.3);width:60px}
+.cover-skillsprout-edate{height:2px;border-radius:2px;background:rgba(255,255,255,0.1);width:40px}
+.cover-skillsprout-badge{
+  font-size:.42rem;font-weight:700;padding:2px 5px;border-radius:3px;letter-spacing:.05em;
+}
+.cover-skillsprout-stats{
+  display:flex;gap:5px;padding:0 10px 10px;
+}
+.cover-skillsprout-stat{
+  flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);
+  border-radius:3px;padding:4px;text-align:center;
+}
+.cover-skillsprout-snum{font-size:.6rem;font-weight:700}
+.cover-skillsprout-slbl{font-size:.36rem;color:rgba(255,255,255,0.3);letter-spacing:.06em;text-transform:uppercase}
+.cover-skillsprout-label{
+  position:absolute;bottom:6px;right:10px;
+  font-size:.42rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,0.18);
+}
+
+/* Light theme adjustments for covers */
+[data-theme="light"] .cover-profiles{background:linear-gradient(135deg,#e0e7ff 0%,#ede9fe 60%,#e0e7ff 100%)}
+[data-theme="light"] .cover-profiles-card{background:rgba(0,0,0,0.04);border-color:rgba(0,0,0,0.08)}
+[data-theme="light"] .cover-profiles-line{background:rgba(0,0,0,0.15)}
+[data-theme="light"] .cover-profiles-label{color:rgba(0,0,0,0.25)}
+
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -1679,18 +1902,36 @@ footer p a{color:var(--gold);text-decoration:none}
     <div class="project-card fade-in" onclick="openModal('profiles')" role="button" tabindex="0" aria-label="View Digital Profile System project details">
       <div class="project-mockup">
         <div class="project-overlay"><span class="project-overlay-text">View Details</span></div>
-        <div class="mockup-inner">
-          <div class="browser-bar">
-            <div class="browser-dot r"></div><div class="browser-dot y"></div><div class="browser-dot g"></div>
-            <div class="browser-url">profiles.app/customers</div>
-          </div>
-          <div class="mockup-body">
-            <div class="mock-profile-grid">
-              <div class="mock-profile-card"><div class="mock-avatar"></div><div class="mock-pname"></div><div class="mock-prole"></div><div class="mock-fields"><div class="mock-field"></div><div class="mock-field" style="width:80%"></div><div class="mock-field" style="width:60%"></div></div></div>
-              <div class="mock-profile-card"><div class="mock-avatar" style="background:linear-gradient(135deg,#1d4ed8,#7c3aed)"></div><div class="mock-pname"></div><div class="mock-prole"></div><div class="mock-fields"><div class="mock-field"></div><div class="mock-field" style="width:80%"></div></div></div>
-              <div class="mock-profile-card"><div class="mock-avatar" style="background:linear-gradient(135deg,#059669,#0d9488)"></div><div class="mock-pname"></div><div class="mock-prole"></div><div class="mock-fields"><div class="mock-field"></div><div class="mock-field" style="width:80%"></div></div></div>
-              <div class="mock-profile-card"><div class="mock-avatar" style="background:linear-gradient(135deg,#d97706,#dc2626)"></div><div class="mock-pname"></div><div class="mock-prole"></div><div class="mock-fields"><div class="mock-field"></div><div class="mock-field" style="width:80%"></div></div></div>
+        <div class="mockup-inner" style="padding:0;overflow:hidden">
+          <div class="cover-mockup cover-profiles">
+            <div class="cover-profiles-accent"></div>
+            <span class="cover-profiles-badge">LIVE</span>
+            <div class="cover-profiles-grid">
+              <div class="cover-profiles-card">
+                <div class="cover-profiles-avatar" style="background:linear-gradient(135deg,#3b82f6,#8b5cf6)"></div>
+                <div class="cover-profiles-lines"><div class="cover-profiles-line" style="width:80%"></div><div class="cover-profiles-line" style="width:55%"></div></div>
+              </div>
+              <div class="cover-profiles-card">
+                <div class="cover-profiles-avatar" style="background:linear-gradient(135deg,#059669,#0d9488)"></div>
+                <div class="cover-profiles-lines"><div class="cover-profiles-line" style="width:90%"></div><div class="cover-profiles-line" style="width:60%"></div></div>
+              </div>
+              <div class="cover-profiles-card">
+                <div class="cover-profiles-avatar" style="background:linear-gradient(135deg,#d97706,#dc2626)"></div>
+                <div class="cover-profiles-lines"><div class="cover-profiles-line" style="width:70%"></div><div class="cover-profiles-line" style="width:45%"></div></div>
+              </div>
+              <div class="cover-profiles-card">
+                <div class="cover-profiles-avatar" style="background:linear-gradient(135deg,#7c3aed,#db2777)"></div>
+                <div class="cover-profiles-lines"><div class="cover-profiles-line" style="width:85%"></div><div class="cover-profiles-line" style="width:50%"></div></div>
+              </div>
+              <div class="cover-profiles-card" style="grid-column:1/-1">
+                <div style="display:flex;gap:4px;flex:1">
+                  <div style="height:3px;flex:3;border-radius:2px;background:rgba(255,255,255,0.15)"></div>
+                  <div style="height:3px;flex:2;border-radius:2px;background:rgba(59,130,246,0.4)"></div>
+                  <div style="height:3px;flex:1;border-radius:2px;background:rgba(255,255,255,0.08)"></div>
+                </div>
+              </div>
             </div>
+            <span class="cover-profiles-label">.NET · MS SQL · REST API</span>
           </div>
         </div>
       </div>
@@ -1707,20 +1948,18 @@ footer p a{color:var(--gold);text-decoration:none}
     <div class="project-card fade-in fade-in-delay" onclick="openModal('haushala')" role="button" tabindex="0" aria-label="View Haushala project details">
       <div class="project-mockup">
         <div class="project-overlay"><span class="project-overlay-text">View Details</span></div>
-        <div class="mockup-inner">
-          <div class="browser-bar">
-            <div class="browser-dot r"></div><div class="browser-dot y"></div><div class="browser-dot g"></div>
-            <div class="browser-url">haushala.app/wellness</div>
-          </div>
-          <div class="mockup-body" style="padding:0">
-            <div class="mock-calm">
-              <div class="mock-calm-circle">🧠</div>
-              <div class="mock-calm-bars">
-                <div class="mock-calm-bar" style="width:80%"></div>
-                <div class="mock-calm-bar" style="width:55%"></div>
-                <div class="mock-calm-bar" style="width:70%"></div>
-              </div>
-              <div style="font-size:.52rem;color:rgba(255,255,255,0.28);letter-spacing:.08em">DAILY CHECK-IN</div>
+        <div class="mockup-inner" style="padding:0;overflow:hidden">
+          <div class="cover-mockup cover-haushala">
+            <div class="cover-haushala-rings">
+              <div class="cover-haushala-ring" style="width:120px;height:120px"></div>
+              <div class="cover-haushala-ring" style="width:160px;height:160px;border-color:rgba(233,121,164,0.05)"></div>
+            </div>
+            <span class="cover-haushala-label">HAUSHALA · WELLNESS</span>
+            <div class="cover-haushala-orb"></div>
+            <div class="cover-haushala-words" style="position:absolute;bottom:10px">
+              <span class="cover-haushala-word">mood</span>
+              <span class="cover-haushala-word">sleep</span>
+              <span class="cover-haushala-word">stress</span>
             </div>
           </div>
         </div>
@@ -1738,24 +1977,29 @@ footer p a{color:var(--gold);text-decoration:none}
     <div class="project-card fade-in fade-in-delay2" onclick="openModal('sbf')" role="button" tabindex="0" aria-label="View SBF Bus Fare project details">
       <div class="project-mockup">
         <div class="project-overlay"><span class="project-overlay-text">View Details</span></div>
-        <div class="mockup-inner">
-          <div class="browser-bar">
-            <div class="browser-dot r"></div><div class="browser-dot y"></div><div class="browser-dot g"></div>
-            <div class="browser-url">sbf.app/fare-check</div>
-          </div>
-          <div class="mockup-body" style="padding:0">
-            <div class="mock-transit">
-              <div class="mock-face-zone">
-                <div class="mock-face-circle"></div>
-                <div class="mock-scan-line"></div>
+        <div class="mockup-inner" style="padding:0;overflow:hidden">
+          <div class="cover-mockup cover-sbf">
+            <div class="cover-sbf-card">
+              <div class="cover-sbf-top">
+                <div class="cover-sbf-logo">SBF PASS</div>
+                <div class="cover-sbf-status">✓ VALID</div>
               </div>
-              <div class="mock-fare-info">
-                <div class="mock-fare-num">NPR 25</div>
-                <div class="mock-fare-label">FARE AMOUNT</div>
-                <div class="mock-fare-bar"></div>
-                <div style="font-size:.48rem;color:rgba(255,255,255,0.25);letter-spacing:.05em;margin-top:4px">VERIFIED · TAP TO PAY</div>
+              <div style="display:flex;gap:8px;align-items:flex-start">
+                <div class="cover-sbf-qr"><div class="cover-sbf-qr-cell filled"></div><div class="cover-sbf-qr-cell filled"></div><div class="cover-sbf-qr-cell"></div><div class="cover-sbf-qr-cell filled"></div><div class="cover-sbf-qr-cell filled"></div><div class="cover-sbf-qr-cell filled"></div><div class="cover-sbf-qr-cell"></div><div class="cover-sbf-qr-cell filled"></div><div class="cover-sbf-qr-cell filled"></div><div class="cover-sbf-qr-cell filled"></div><div class="cover-sbf-qr-cell"></div><div class="cover-sbf-qr-cell"></div><div class="cover-sbf-qr-cell filled"></div><div class="cover-sbf-qr-cell"></div><div class="cover-sbf-qr-cell filled"></div><div class="cover-sbf-qr-cell"></div><div class="cover-sbf-qr-cell filled"></div><div class="cover-sbf-qr-cell filled"></div><div class="cover-sbf-qr-cell"></div><div class="cover-sbf-qr-cell"></div><div class="cover-sbf-qr-cell filled"></div><div class="cover-sbf-qr-cell"></div><div class="cover-sbf-qr-cell filled"></div><div class="cover-sbf-qr-cell filled"></div><div class="cover-sbf-qr-cell filled"></div></div>
+                <div style="display:flex;flex-direction:column;gap:3px;flex:1">
+                  <div style="height:2.5px;border-radius:2px;background:rgba(255,255,255,0.3);width:100%"></div>
+                  <div style="height:2px;border-radius:2px;background:rgba(255,255,255,0.12);width:70%"></div>
+                  <div style="height:2px;border-radius:2px;background:rgba(255,255,255,0.12);width:55%"></div>
+                  <div style="font-size:.38rem;color:rgba(147,197,253,0.5);margin-top:2px;letter-spacing:.05em">Universal Pass</div>
+                </div>
+              </div>
+              <div class="cover-sbf-routes">
+                <div class="cover-sbf-route">Khalti Pay</div>
+                <div class="cover-sbf-route">QR Scan</div>
+                <div class="cover-sbf-route">GPS</div>
               </div>
             </div>
+            <span class="cover-sbf-label">Laravel · React · MySQL</span>
           </div>
         </div>
       </div>
@@ -1772,21 +2016,39 @@ footer p a{color:var(--gold);text-decoration:none}
     <div class="project-card fade-in" onclick="openModal('infosprout')" role="button" tabindex="0" aria-label="View InfoSprout project details">
       <div class="project-mockup">
         <div class="project-overlay"><span class="project-overlay-text">View Details</span></div>
-        <div class="mockup-inner">
-          <div class="browser-bar">
-            <div class="browser-dot r"></div><div class="browser-dot y"></div><div class="browser-dot g"></div>
-            <div class="browser-url">infosprout.app/notice</div>
-          </div>
-          <div class="mockup-body" style="padding:0">
-            <div class="mock-form">
-              <div class="mock-form-label"></div>
-              <div class="mock-form-field"></div>
-              <div class="mock-form-label"></div>
-              <div class="mock-form-field"></div>
-              <div class="mock-form-label"></div>
-              <div class="mock-form-field" style="height:22px"></div>
-              <div class="mock-form-btn"></div>
+        <div class="mockup-inner" style="padding:0;overflow:hidden">
+          <div class="cover-mockup cover-infosprout">
+            <div class="cover-infosprout-board">
+              <div class="cover-infosprout-header">
+                <div class="cover-infosprout-icon"></div>
+                <span class="cover-infosprout-htitle">Notice Board</span>
+              </div>
+              <div class="cover-infosprout-item">
+                <div class="cover-infosprout-dot" style="background:#f59e0b"></div>
+                <div class="cover-infosprout-lines">
+                  <div class="cover-infosprout-line" style="width:85%"></div>
+                  <div class="cover-infosprout-line" style="width:60%"></div>
+                </div>
+                <div class="cover-infosprout-tag" style="background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);color:rgba(251,191,36,0.8)">ALL</div>
+              </div>
+              <div class="cover-infosprout-item">
+                <div class="cover-infosprout-dot" style="background:#3b82f6"></div>
+                <div class="cover-infosprout-lines">
+                  <div class="cover-infosprout-line" style="width:70%"></div>
+                  <div class="cover-infosprout-line" style="width:50%"></div>
+                </div>
+                <div class="cover-infosprout-tag" style="background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);color:rgba(147,197,253,0.8)">DEV</div>
+              </div>
+              <div class="cover-infosprout-item">
+                <div class="cover-infosprout-dot" style="background:#10b981"></div>
+                <div class="cover-infosprout-lines">
+                  <div class="cover-infosprout-line" style="width:90%"></div>
+                  <div class="cover-infosprout-line" style="width:40%"></div>
+                </div>
+                <div class="cover-infosprout-tag" style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);color:rgba(52,211,153,0.8)">HR</div>
+              </div>
             </div>
+            <span class="cover-infosprout-label">PHP · MySQL · Bootstrap</span>
           </div>
         </div>
       </div>
@@ -1803,23 +2065,46 @@ footer p a{color:var(--gold);text-decoration:none}
     <div class="project-card fade-in fade-in-delay" onclick="openModal('skillsprout')" role="button" tabindex="0" aria-label="View SkillSprout project details">
       <div class="project-mockup">
         <div class="project-overlay"><span class="project-overlay-text">View Details</span></div>
-        <div class="mockup-inner">
-          <div class="browser-bar">
-            <div class="browser-dot r"></div><div class="browser-dot y"></div><div class="browser-dot g"></div>
-            <div class="browser-url">skillsprout.app/events</div>
-          </div>
-          <div class="mockup-body">
-            <div class="mock-main">
-              <div class="mock-row" style="gap:5px">
-                <div class="mock-stat" style="background:rgba(34,197,94,0.08)"><div class="mock-stat-num" style="color:#4ade80">14</div><div class="mock-stat-label">Events</div></div>
-                <div class="mock-stat"><div class="mock-stat-num">312</div><div class="mock-stat-label">Registered</div></div>
+        <div class="mockup-inner" style="padding:0;overflow:hidden">
+          <div class="cover-mockup cover-skillsprout" style="flex-direction:column;align-items:stretch;justify-content:flex-start">
+            <div class="cover-skillsprout-events">
+              <div class="cover-skillsprout-event a1">
+                <div class="cover-skillsprout-etitle">
+                  <div class="cover-skillsprout-ename"></div>
+                  <div class="cover-skillsprout-edate" style="margin-top:3px"></div>
+                </div>
+                <div class="cover-skillsprout-badge" style="background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);color:#fbbf24">32 spots</div>
               </div>
-              <div class="mock-table">
-                <div class="mock-table-row"><div class="mock-table-cell w2"></div><div class="mock-table-cell"></div><div class="mock-table-cell" style="background:rgba(34,197,94,0.35)"></div></div>
-                <div class="mock-table-row"><div class="mock-table-cell w2"></div><div class="mock-table-cell"></div><div class="mock-table-cell" style="background:rgba(251,191,36,0.35)"></div></div>
-                <div class="mock-table-row"><div class="mock-table-cell w2"></div><div class="mock-table-cell"></div><div class="mock-table-cell"></div></div>
+              <div class="cover-skillsprout-event a2">
+                <div class="cover-skillsprout-etitle">
+                  <div class="cover-skillsprout-ename" style="width:50px"></div>
+                  <div class="cover-skillsprout-edate" style="margin-top:3px;width:35px"></div>
+                </div>
+                <div class="cover-skillsprout-badge" style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);color:#34d399">Full</div>
+              </div>
+              <div class="cover-skillsprout-event a3">
+                <div class="cover-skillsprout-etitle">
+                  <div class="cover-skillsprout-ename" style="width:45px"></div>
+                  <div class="cover-skillsprout-edate" style="margin-top:3px"></div>
+                </div>
+                <div class="cover-skillsprout-badge" style="background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);color:#a5b4fc">8 spots</div>
               </div>
             </div>
+            <div class="cover-skillsprout-stats">
+              <div class="cover-skillsprout-stat">
+                <div class="cover-skillsprout-snum" style="color:#fbbf24">14</div>
+                <div class="cover-skillsprout-slbl">Events</div>
+              </div>
+              <div class="cover-skillsprout-stat">
+                <div class="cover-skillsprout-snum" style="color:#34d399">312</div>
+                <div class="cover-skillsprout-slbl">Registered</div>
+              </div>
+              <div class="cover-skillsprout-stat">
+                <div class="cover-skillsprout-snum" style="color:#a5b4fc">100%</div>
+                <div class="cover-skillsprout-slbl">Tracked</div>
+              </div>
+            </div>
+            <span class="cover-skillsprout-label">PHP · MySQL</span>
           </div>
         </div>
       </div>
@@ -2017,30 +2302,49 @@ updateActiveNav();
 /* ══════════════════════════════════════
    FORM SUBMIT
 ══════════════════════════════════════ */
+/* ── EmailJS config ──────────────────────────────────────
+   1. Sign up free at https://www.emailjs.com
+   2. Add an Email Service (Gmail) → copy Service ID
+   3. Create an Email Template → copy Template ID
+      Template variables to use: {{from_name}}, {{from_email}}, {{service}}, {{message}}
+   4. Go to Account → copy your Public Key
+   Replace the three placeholders below with your real values.
+─────────────────────────────────────────────────────── */
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // e.g. 'service_abc123'
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // e.g. 'template_xyz456'
+const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // e.g. 'aBcDeFgHiJkLmNoP'
+
 async function handleSubmit(e){
   e.preventDefault();
   const form=e.target;
   const btn=form.querySelector('button[type="submit"]');
-  const name=form.querySelector('#cf-name')?.value||'';
-  const email=form.querySelector('#cf-email')?.value||'';
-  const service=form.querySelector('#cf-service')?.value||'';
-  const message=form.querySelector('#cf-message')?.value||'';
-  if(!name||!email||!message){alert('Please fill in all required fields.');return;}
+  const name=form.querySelector('#cf-name')?.value.trim()||'';
+  const email=form.querySelector('#cf-email')?.value.trim()||'';
+  const service=form.querySelector('#cf-service')?.value||'Not specified';
+  const message=form.querySelector('#cf-message')?.value.trim()||'';
+
+  // Basic validation
+  if(!name||!message){alert('Please fill in your name and message.');return;}
+  const emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  if(!email||!emailOk){alert('Please enter a valid email address.');return;}
+
   const orig=btn.innerHTML;
   btn.innerHTML='SENDING…';btn.disabled=true;
+
   try{
-    const res=await fetch('https://formsubmit.co/ajax/mgwebhg@gmail.com',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify({name,email,service,message,_subject:'New Project Inquiry — MG Web Solutions'})
+    emailjs.init({publicKey: EMAILJS_PUBLIC_KEY});
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      from_name: name,
+      from_email: email,
+      service: service,
+      message: message,
+      to_email: 'mgwebhg@gmail.com'
     });
-    const data=await res.json();
-    if(data.success==='true'||data.success===true){
-      btn.innerHTML='MESSAGE SENT ✓';
-      form.reset();
-      setTimeout(()=>{btn.innerHTML=orig;btn.disabled=false;},4000);
-    }else{throw new Error('Send failed');}
+    btn.innerHTML='MESSAGE SENT ✓';
+    form.reset();
+    setTimeout(()=>{btn.innerHTML=orig;btn.disabled=false;},4000);
   }catch(err){
+    console.error('EmailJS error:',err);
     btn.innerHTML='FAILED — TRY AGAIN';
     setTimeout(()=>{btn.innerHTML=orig;btn.disabled=false;},3000);
   }
