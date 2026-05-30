@@ -105,27 +105,27 @@ body{
 [data-theme="light"] .sp-header h2{color:var(--lt-ink)}
 [data-theme="light"] .sp-summary{background:var(--lt-bg2);border-color:var(--lt-border)}
 [data-theme="light"] .sp-sum-num{color:var(--lt-ink)}
-/* Projects: stays dark in both themes for visual contrast */
-[data-theme="light"] #projects{background:#161210}
-[data-theme="light"] .projects-section-header h2{color:#FAFAF8}
+/* Projects: light theme uses warm light palette */
+[data-theme="light"] #projects{background:var(--lt-bg)}
+[data-theme="light"] .projects-section-header h2{color:var(--lt-ink)}
 [data-theme="light"] .projects-section-header h2 em{color:var(--red-mid)}
-[data-theme="light"] .projects-section-header .section-desc{color:rgba(250,250,248,0.55)}
+[data-theme="light"] .projects-section-header .section-desc{color:var(--lt-ink2)}
 [data-theme="light"] .projects-section-header .label-text{color:var(--gold)}
-[data-theme="light"] .featured-wb{background:#1C1814;border-color:rgba(201,168,76,0.22)}
-[data-theme="light"] .featured-wb-content{border-right-color:rgba(201,168,76,0.15)}
-[data-theme="light"] .featured-wb-content h3{color:#FAFAF8}
-[data-theme="light"] .wb-desc{color:rgba(250,250,248,0.55)}
-[data-theme="light"] .wb-metric{background:#221E1A}
-[data-theme="light"] .wb-highlight-cell{background:#1C1814}
-[data-theme="light"] .wb-highlight-cell:hover{background:#221E1A}
-[data-theme="light"] .wh-name{color:#FAFAF8}
-[data-theme="light"] .wh-desc{color:rgba(250,250,248,0.5)}
-[data-theme="light"] .wb-impact-cell{background:#1C1814}
-[data-theme="light"] .project-card{background:#1C1814;border-color:rgba(201,168,76,0.15)}
-[data-theme="light"] .project-card h3{color:#FAFAF8}
-[data-theme="light"] .project-card p{color:rgba(250,250,248,0.55)}
-[data-theme="light"] .stack-tag{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.12);color:rgba(250,250,248,0.5)}
-[data-theme="light"] .project-tag{color:var(--gold);border-color:rgba(201,168,76,0.3);background:rgba(201,168,76,0.06)}
+[data-theme="light"] .featured-wb{background:var(--lt-bg2);border-color:rgba(185,28,28,0.14)}
+[data-theme="light"] .featured-wb-content{border-right-color:rgba(185,28,28,0.12)}
+[data-theme="light"] .featured-wb-content h3{color:var(--lt-ink)}
+[data-theme="light"] .wb-desc{color:var(--lt-ink2)}
+[data-theme="light"] .wb-metric{background:var(--lt-bg3)}
+[data-theme="light"] .wb-highlight-cell{background:var(--lt-bg2)}
+[data-theme="light"] .wb-highlight-cell:hover{background:var(--lt-bg3)}
+[data-theme="light"] .wh-name{color:var(--lt-ink)}
+[data-theme="light"] .wh-desc{color:var(--lt-ink2)}
+[data-theme="light"] .wb-impact-cell{background:var(--lt-bg2)}
+[data-theme="light"] .project-card{background:var(--lt-bg2);border-color:rgba(185,28,28,0.12)}
+[data-theme="light"] .project-card h3{color:var(--lt-ink)}
+[data-theme="light"] .project-card p{color:var(--lt-ink2)}
+[data-theme="light"] .stack-tag{background:rgba(0,0,0,0.04);border-color:rgba(0,0,0,0.12);color:var(--lt-ink2)}
+[data-theme="light"] .project-tag{color:var(--red-deep);border-color:rgba(185,28,28,0.25);background:rgba(185,28,28,0.05)}
 [data-theme="light"] #contact{background:var(--lt-bg)}
 [data-theme="light"] .contact-info h3{color:var(--lt-ink)}
 [data-theme="light"] .contact-info>p{color:var(--lt-ink2)}
@@ -2017,7 +2017,34 @@ updateActiveNav();
 /* ══════════════════════════════════════
    FORM SUBMIT
 ══════════════════════════════════════ */
-function handleSubmit(e){e.preventDefault();window.open('https://forms.gle/FLViRjhekjbE1D7LA','_blank')}
+async function handleSubmit(e){
+  e.preventDefault();
+  const form=e.target;
+  const btn=form.querySelector('button[type="submit"]');
+  const name=form.querySelector('#cf-name')?.value||'';
+  const email=form.querySelector('#cf-email')?.value||'';
+  const service=form.querySelector('#cf-service')?.value||'';
+  const message=form.querySelector('#cf-message')?.value||'';
+  if(!name||!email||!message){alert('Please fill in all required fields.');return;}
+  const orig=btn.innerHTML;
+  btn.innerHTML='SENDING…';btn.disabled=true;
+  try{
+    const res=await fetch('https://formsubmit.co/ajax/mgwebhg@gmail.com',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({name,email,service,message,_subject:'New Project Inquiry — MG Web Solutions'})
+    });
+    const data=await res.json();
+    if(data.success==='true'||data.success===true){
+      btn.innerHTML='MESSAGE SENT ✓';
+      form.reset();
+      setTimeout(()=>{btn.innerHTML=orig;btn.disabled=false;},4000);
+    }else{throw new Error('Send failed');}
+  }catch(err){
+    btn.innerHTML='FAILED — TRY AGAIN';
+    setTimeout(()=>{btn.innerHTML=orig;btn.disabled=false;},3000);
+  }
+}
 
 /* ══════════════════════════════════════
    3D TILT
