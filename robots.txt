@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://melinagiri.com.np/sitemap.xml
